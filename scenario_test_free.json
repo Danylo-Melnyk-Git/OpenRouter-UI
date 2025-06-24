@@ -1,0 +1,14 @@
+{
+  "models": [
+    "deepseek/deepseek-chat-v3-0324"
+  ],
+  "tasks": [
+    {
+      "system_prompt": "Return a list of ten labeled relationships (A to J), each followed by a proposed semantic label.\nFormat: A: [label], B: [label], ..., J: [label]\nInclude only the label for each relation.\nDo not explain choices, interpret concepts, or describe the task.\nDo not include introductory or concluding remarks.",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 10.txt"
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "models": [
+    "openai/chatgpt-4o-latest",
+    "anthropic/claude-opus-4",
+    "google/gemini-2.5-pro",
+    "deepseek/deepseek-chat-v3-0324",
+    "meta-llama/llama-4-maverick"
+  ],
+  "tasks": [
+    {
+      "system_prompt": "You are solving a constraint-based transportation puzzle and must construct a full state space graph.\nYour output must be in plain text only, showing each state as a separate line.\nFor each state, include:\n- The configuration of all five entities: Farmer (F), Poacher (P), Fox (X), Goose (G), and Potatoes (T), indicating their positions (island or mainland).\n- An arrow indicating a valid transition between states.\nOnly valid and safe transitions must be shown, based strictly on the constraints described in the task.\nNo entity can be moved back immediately after just being moved.\nDo not include comments, summaries, or any explanatory text.\nUse the following format:\n[State_A] --> [State_B]",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 1.txt"
+      }
+    },
+    {
+      "system_prompt": "You are solving a state space planning problem. Given a defined initial state and goal state, return only one valid solution path that reaches the goal.\nEach line must represent one valid state transition in the format:\n[CurrentState] --> [NextState]\n\nRules:\n- Only include transitions that obey movement and timing rules.\n- Each state must specify:\n  - Position of each traveller (P1 or P2)\n  - Torch position (P1 or P2)\n  - Remaining torch time\n- The torch must be used during each crossing.\n- Travellers can only move: two from P1 to P2, or one from P2 to P1.\n- Time decreases by the duration of the crossing (max of the two or single crossing time).\n- If torch time runs out, no further transitions are valid.\n- Stop when all travellers are on P2 and torch time ≥ 0.\n\nDo not output the full graph. Only return one valid solution path from the initial to the goal state.",
+      "user_prompt": "Solve the torch crossing problem as described in the attached task. Return only one valid solution path in the required format.",
+      "attachments": {
+        "text": "tasks/Task 2.txt"
+      }
+    },
+    {
+      "system_prompt": "Generate a full game tree from the initial state.\nEach node must show the current numerical string and total score.\nEach edge represents one valid move using the replacement rules.\nLeaf nodes must indicate the winner: \"First\" or \"Second\".\nUse this format strictly:\n[String] | Score → [String'] | New Score\nAt the end of each complete path, append = Winner.\nDo not include explanations, comments, or task details.",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 3.txt"
+      }
+    },
+    {
+      "system_prompt": "Return the solution as iteration tables for each algorithm.\nFor every iteration, list current OPEN and CLOSED sets.\nIf a solution path is required, return it as a simple node sequence.\nDo not include explanations, task restatements, or comments.\nOutput only:\n• OPEN/CLOSED tables per iteration.\n• Final solution path if requested.",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 4.txt"
+      }
+    },
+    {
+      "system_prompt": "Return the full step-by-step execution trace of each heuristic search algorithm (Hill Climbing, Best-First Search, Beam Search).\nFor every algorithm:\n• Use a table with columns: Iteration, OPEN, CLOSED.\n• Populate the table row-by-row according to the algorithm logic.\n• Apply the correct heuristic rule:\n• For data-driven search, select nodes with minimum heuristic.\n• For goal-driven search, select nodes with maximum heuristic.\nDo not include explanations, task restatements, or extra comments.",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 5.txt"
+      }
+    },
+    {
+      "system_prompt": "Return a game tree using Minimax and Alpha-Beta Pruning algorithms starting from the MAX level.\nEach node must include:\n• Numerical string\n• First player score\n• Second player score\n• Node value (for Minimax only)\nShow tree structure as text using indentation or arrows.\nPrune unnecessary branches (for Alpha-Beta only).\nDo not include explanations or repeat task description.",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 6.txt"
+      }
+    },
+    {
+      "system_prompt": "Solve all four tasks using the appropriate search algorithm.\n\nFor each task, provide:\n- The selected option (verbatim as written in the original list of answers).\n- A brief explanation of why this option is correct, including:\n  • Step-by-step state of OPEN and CLOSED lists for each iteration up to the one requested.\n  • Description of the traversal direction and heuristic (if applicable).\n  • Mention of any early stop (e.g. node overlap, local maxima).\n\nDo not repeat the full task text. Do not include unrelated comments.\nUse clear structure: label each task and separate answers.\n\nOutput structure:\n1. Task Name\nAnswer: [selected option]\nExplanation: [your justification]",
+      "user_prompt": "Solve all four tasks from the attached file and return the selected answer with explanation for each task.",
+      "attachments": {
+        "text": "tasks/Task 7.txt"
+      }
+    },
+    {
+      "system_prompt": "Return the selected path using the Minimax algorithm.\nOutput format: a single string with node names in order (e.g., \"ACFIL\").\nInclude only the chosen path based on Minimax logic.\nNo comments, explanations, or repeated task description.",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 8.txt"
+      }
+    },
+    {
+      "system_prompt": "You must solve multiple machine learning tasks. For each task, follow the specified output format:\n1. Hierarchical Clustering — Output: dendrogram (ASCII tree or text-based hierarchy if image is not possible).\n2. K-Means — Output: table listing cluster membership for each object and updated centroids with exact values (max two decimals, no rounding).\n3. k-NN (Hamming distance) — Output: most similar user (1NN), then predicted class for 1NN and k=3.\n4. Linear Regression — Output: sum of differences and final error value (two decimals, no rounding).\n5. Logistic Regression — Output: predicted class for each object and total correct classifications.\nDo not include any explanations, task descriptions, or additional text.",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 9.txt"
+      }
+    },
+    {
+      "system_prompt": "Return a list of ten labeled relationships (A to J), each followed by a proposed semantic label.\nFormat: A: [label], B: [label], ..., J: [label]\nInclude only the label for each relation.\nDo not explain choices, interpret concepts, or describe the task.\nDo not include introductory or concluding remarks.",
+      "user_prompt": "Solve the task from the attached file and return the answer in the required format.",
+      "attachments": {
+        "text": "tasks/Task 10.txt"
+      }
+    }
+  ]
+}
