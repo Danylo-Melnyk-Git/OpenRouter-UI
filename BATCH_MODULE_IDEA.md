@@ -1,14 +1,14 @@
 # Batch Model Evaluation Module
 
-Модуль для автоматизированного массового тестирования языковых моделей через OpenRouter API. Для каждой выбранной модели автоматически прогоняет одинаковый набор заданий (тасков), где у каждого задания есть свой system prompt, user prompt и прикреплённый файл. Все результаты сохраняются для последующего анализа. Модуль работает как отдельный Python-скрипт без UI.
+This module is for automated batch testing of language models via the OpenRouter API. For each selected model, it runs the same set of tasks (each with its own system prompt, user prompt, and attached file). All results are saved for later analysis. The module is a standalone Python script with no UI.
 
-**Как работает:**
-- Задаёшь список моделей для тестирования (например, 5 моделей).
-- Задаёшь список тасков (например, 10 штук), у каждого: system prompt, user prompt, файл.
-- Для каждой модели прогоняются все таски (каждая модель получает все 10 заданий).
-- Все результаты (ответы, ошибки, логи) сохраняются для анализа.
+**How it works:**
+- Define a list of models to test (e.g., 5 models).
+- Define a list of tasks (e.g., 10 tasks), each with: system prompt, user prompt, and a file.
+- Every model is tested on every task (each model gets all 10 tasks).
+- All results (answers, errors, logs) are saved for analysis.
 
-**Пример структуры сценария:**
+**Scenario structure example:**
 
 ```json
 {
@@ -29,40 +29,40 @@
 }
 ```
 
-**Запуск:**
-1. Подготовь сценарий в формате JSON или Python-словаря.
-2. Запусти модуль командой:
+**How to run:**
+1. Prepare your scenario as a JSON file or Python dict.
+2. Run the module:
    ```bash
    python batch_tester.py
    ```
-3. Результаты появятся в папке `batch_results/`.
+3. Results will appear in the `batch_results/` folder.
 
 ---
 
-## Как реализовать модуль (минимально взаимодействуя с другими файлами проекта)
+## Minimal integration (no dependencies on other project files)
 
-1. Создай отдельный файл, например, `batch_tester.py`.
-2. В этом файле реализуй всё необходимое:
-   - Загрузку сценария из JSON (или Python-словаря).
-   - Функцию отправки запросов к OpenRouter API (можно использовать стандартные библиотеки: `requests` или `httpx`).
-   - Обработку вложений (чтение файлов, если нужно отправлять их в API).
-   - Сохранение результатов (ответов, ошибок) в папку `batch_results/`.
-3. Не импортируй ничего из других файлов проекта, если это не требуется.
-4. Примерная структура кода:
+1. Create a separate file, e.g., `batch_tester.py`.
+2. Implement everything in this file:
+   - Load scenario from JSON (or Python dict).
+   - Function to send requests to OpenRouter API (use `requests` or `httpx`).
+   - Handle attachments (read files if needed for the API).
+   - Save results (answers, errors) to `batch_results/`.
+3. Do not import anything from other project files unless absolutely necessary.
+4. Example code structure:
 
 ```python
 import json
 import os
-import requests  # или httpx
+import requests  # or httpx
 
 def load_scenario(path):
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 def send_request_to_api(model, system_prompt, user_prompt, attachments):
-    # Здесь реализуй отправку запроса к OpenRouter API
-    # Используй requests.post(...)
-    # Пример:
+    # Implement sending a request to OpenRouter API here
+    # Use requests.post(...)
+    # Example:
     # response = requests.post(url, headers=headers, json=payload, files=files)
     # return response.json()
     pass
@@ -88,8 +88,8 @@ if __name__ == '__main__':
     main()
 ```
 
-5. Все функции и логика — только внутри `batch_tester.py`. Это не затрагивает другие части проекта и не ломает UI.
+5. All logic and functions should be inside `batch_tester.py`. This does not affect other parts of the project and does not break the UI.
 
 ---
 
-Модуль предназначен для исследовательских и инженерных задач по сравнению языковых моделей.
+This module is intended for research and engineering tasks to compare language models.
